@@ -1,5 +1,6 @@
 package com.gmail.bunnehrealm.warpsandports.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -35,14 +36,25 @@ public class Warp implements CommandExecutor{
 									+ "/warp <Warp Name>");
 						}
 						else{
-							if(!(MainClass.players.contains(player.getName() + ".Warps." + args[0]))){
+							if(player.isOp()){
+								World world = Bukkit.getWorld(MainClass.warps.getString("Warps." + args[0] + ".world"));
+								Double x = MainClass.warps.getDouble("Warps." + args[0] + ".x");
+								Double y = MainClass.warps.getDouble("Warps." + args[0] + ".y");
+								Double z = MainClass.warps.getDouble("Warps." + args[0] + ".z");
+							
+							Location loc = new Location(world,x,y,z);
+							player.teleport(loc);
+							return true;
+							}
+							else if(!(MainClass.players.contains(player.getName() + ".Warps." + args[0]))){
 								player.sendMessage(ChatColor.RED + "You do not have that Warp!");
+								return false;
 							}
 							else{
 								MainClass.loadWarps();
 								if(MainClass.warps.contains("Warps." + args[0])){
-								
-									World world = (World) MainClass.warps.get("Warps." + args[0] + ".world");
+									
+									World world = Bukkit.getWorld(MainClass.warps.getString("Warps." + args[0] + ".world"));
 									Double x = MainClass.warps.getDouble("Warps." + args[0] + ".x");
 									Double y = MainClass.warps.getDouble("Warps." + args[0] + ".y");
 									Double z = MainClass.warps.getDouble("Warps." + args[0] + ".z");

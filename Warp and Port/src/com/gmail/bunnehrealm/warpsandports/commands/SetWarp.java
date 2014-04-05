@@ -33,23 +33,36 @@ public class SetWarp implements CommandExecutor {
 						return false;
 					}
 					if (args.length == 1) {
+						if(MainClass.warps.contains("Warps." + args[0])){
+							player.sendMessage(ChatColor.RED + "That warp already exists!");
+							return false;
+						}
+						else{
+						
 						Location loc = player.getLocation();
+						
 						int x = loc.getBlockX();
 						int y = loc.getBlockY();
 						int z = loc.getBlockZ();
+						
 						World world = player.getWorld();
+						
 						MainClass.warps.set("Warps." + args[0].toString()
-								+ ".world", world);
+								+ ".world", world.getName());
 						MainClass.warps.set("Warps." + args[0].toString()
 								+ ".x", x);
 						MainClass.warps.set("Warps." + args[0].toString()
 								+ ".y", y);
 						MainClass.warps.set("Warps." + args[0].toString()
 								+ ".z", z);
+
 						MainClass.saveWarps();
 						player.sendMessage(ChatColor.GREEN + "The warp point "
 								+ ChatColor.AQUA + args[0] + ChatColor.GREEN
 								+ " has been created!");
+						
+						return true;
+						}
 					} else {
 						player.sendMessage(ChatColor.RED + "Correct use is "
 								+ ChatColor.AQUA + "/setwarp <WarpName>");

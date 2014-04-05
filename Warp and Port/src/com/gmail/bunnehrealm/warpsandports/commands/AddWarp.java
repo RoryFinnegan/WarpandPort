@@ -21,24 +21,24 @@ public class AddWarp implements CommandExecutor {
 	public boolean onCommand(CommandSender cs, Command label, String string,
 			String[] args) {
 
-		if (string.equalsIgnoreCase("addwarp")) {
+		if (string.equalsIgnoreCase("addwarpuser")) {
 			if (!(cs instanceof Player)) {
 				return false;
 			} else {
+				
 				Player player = (Player) cs;
-				if (player.hasPermission("warpsandports.addwarp")
-						|| player.isOp()) {
+				if(!(player.hasPermission("warpsandports.addwarpuser") || player.isOp())) {
+					player.sendMessage(ChatColor.RED
+							+ "You do not have permission to use this command!");
+					return false;
+				}
+				else
 					if (args.length != 2) {
 						player.sendMessage(ChatColor.RED
 								+ "The correct usage is " + ChatColor.AQUA
 								+ "/addwarp <Player Name> <Warp Name>");
-					} else {
-						Player target = player.getServer().getPlayer(args[0]);
-						if (!(target.isOnline())) {
-							player.sendMessage(ChatColor.RED
-									+ "That player is not online!");
-							return false;
-						} else {
+					}  else {
+							Player target = player.getServer().getPlayer(args[0]);
 							if (!(MainClass.warps.contains("Warps." + args[1]))) {
 								player.sendMessage(ChatColor.RED
 										+ "That warp does not exist!");
@@ -46,18 +46,14 @@ public class AddWarp implements CommandExecutor {
 							} else {
 								MainClass.players.set(target.getName()
 										+ ".Warps." + args[1].toString() , "");
+								player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.GREEN + " can now warp to " + ChatColor.AQUA + args[1]);
 								MainClass.savePlayers();
 								return true;
 							}
 						}
 					}
-				} else {
-					player.sendMessage(ChatColor.RED
-							+ "You do not have permission to use this command!");
-					return false;
-				}
-			}
-		}
+				} 
+			
 
 		return false;
 	}

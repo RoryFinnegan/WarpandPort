@@ -10,6 +10,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.bunnehrealm.warpsandports.commands.AddWarp;
+import com.gmail.bunnehrealm.warpsandports.commands.DelWarp;
+import com.gmail.bunnehrealm.warpsandports.commands.RemoveWarp;
 import com.gmail.bunnehrealm.warpsandports.commands.SetWarp;
 import com.gmail.bunnehrealm.warpsandports.commands.Warp;
 
@@ -27,6 +29,8 @@ public class MainClass extends JavaPlugin {
 	public SetWarp setwarp = new SetWarp(this);
 	public AddWarp addwarp = new AddWarp(this);
 	public Warp warp = new Warp(this);
+	public DelWarp delWarp = new DelWarp(this);
+	public RemoveWarp removeWarp = new RemoveWarp(this);
 	
 	PluginManager pm = getServer().getPluginManager();
 
@@ -57,8 +61,10 @@ public class MainClass extends JavaPlugin {
 						+ " Enabled!");
 		
 		getCommand("setwarp").setExecutor(setwarp);
-		getCommand("addwarp").setExecutor(addwarp);
+		getCommand("addwarpuser").setExecutor(addwarp);
 		getCommand("warp").setExecutor(warp);
+		getCommand("delwarp").setExecutor(delWarp);
+		getCommand("removewarpuser").setExecutor(removeWarp);
 
 		warpsFile = new File(getDataFolder(), "Warps.yml");
 		warps = new YamlConfiguration();
@@ -73,6 +79,7 @@ public class MainClass extends JavaPlugin {
 			firstPlayerRun();
 		}
 		catch(Exception e){
+			e.printStackTrace();			
 			return;
 		}
 
@@ -82,6 +89,7 @@ public class MainClass extends JavaPlugin {
 			firstWarpRun();
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return;
 		}
 
@@ -91,6 +99,7 @@ public class MainClass extends JavaPlugin {
 			firstPortRun();
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return;
 		}
 
@@ -110,7 +119,8 @@ public class MainClass extends JavaPlugin {
 		public void loadWarps() {
 	        try {
 	            warps.load(warpsFile);
-	        } catch (Exception e) {
+	        } catch (Exception e) {e.printStackTrace();
+	        	e.printStackTrace();
 	            return;
 	        }
 	    }
@@ -118,7 +128,7 @@ public class MainClass extends JavaPlugin {
 			try{
 			warps.save(warpsFile);
 		}
-			catch(IOException e){
+			catch(IOException e){e.printStackTrace();
 				return;
 			}
 	}
@@ -132,7 +142,7 @@ public class MainClass extends JavaPlugin {
 		public void loadPlayers() {
 	        try {
 	            players.load(playersFile);
-	        } catch (Exception e) {
+	        } catch (Exception e) {e.printStackTrace();
 	            return;
 	        }
 	    }
@@ -140,7 +150,7 @@ public class MainClass extends JavaPlugin {
 			try{
 			players.save(playersFile);
 		}
-			catch(IOException e){
+			catch(IOException e){e.printStackTrace();
 				return;
 			}
 	}
@@ -155,7 +165,7 @@ public class MainClass extends JavaPlugin {
 		public void loadPorts() {
 	        try {
 	            ports.load(portsFile);
-	        } catch (Exception e) {
+	        } catch (Exception e) {e.printStackTrace();
 	            return;
 	        }
 	    }
@@ -163,7 +173,7 @@ public class MainClass extends JavaPlugin {
 			try{
 			ports.save(portsFile);
 		}
-			catch(IOException e){
+			catch(IOException e){e.printStackTrace();
 				return;
 			}
 	}
