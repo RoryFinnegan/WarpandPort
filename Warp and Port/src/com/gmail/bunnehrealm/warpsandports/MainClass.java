@@ -14,6 +14,7 @@ import com.gmail.bunnehrealm.warpsandports.commands.DelWarp;
 import com.gmail.bunnehrealm.warpsandports.commands.RemoveWarp;
 import com.gmail.bunnehrealm.warpsandports.commands.SetWarp;
 import com.gmail.bunnehrealm.warpsandports.commands.Warp;
+import com.gmail.bunnehrealm.warpsandports.listeners.WarpSigns;
 
 public class MainClass extends JavaPlugin {
 	public MainClass MainClass;
@@ -31,6 +32,7 @@ public class MainClass extends JavaPlugin {
 	public Warp warp = new Warp(this);
 	public DelWarp delWarp = new DelWarp(this);
 	public RemoveWarp removeWarp = new RemoveWarp(this);
+	public WarpSigns warpSign = new WarpSigns(this);
 	
 	PluginManager pm = getServer().getPluginManager();
 
@@ -65,6 +67,8 @@ public class MainClass extends JavaPlugin {
 		getCommand("warp").setExecutor(warp);
 		getCommand("delwarp").setExecutor(delWarp);
 		getCommand("removewarpuser").setExecutor(removeWarp);
+		
+		pm.registerEvents(warpSign, this);
 
 		warpsFile = new File(getDataFolder(), "Warps.yml");
 		warps = new YamlConfiguration();
@@ -75,6 +79,16 @@ public class MainClass extends JavaPlugin {
 		playersFile = new File(getDataFolder(), "Players.yml");
 		players = new YamlConfiguration();
 		
+		getConfig().options().copyDefaults(true);
+		
+		
+		if (!this.getConfig().isSet("WarpName")) {
+			this.getConfig().set("WarpName", "Warp");
+		}
+		if (!this.getConfig().isSet("WarpColor")) {
+			this.getConfig().set("WarpColor", "&b");
+		}
+		saveConfig();
 		try{
 			firstPlayerRun();
 		}
