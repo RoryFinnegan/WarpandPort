@@ -88,6 +88,9 @@ public class MainClass extends JavaPlugin {
 		if (!this.getConfig().isSet("WarpColor")) {
 			this.getConfig().set("WarpColor", "&b");
 		}
+		if (!this.getConfig().isSet("WarpDelaySeconds")) {
+			this.getConfig().set("WarpDelay", "5");
+		}
 		saveConfig();
 		try{
 			firstPlayerRun();

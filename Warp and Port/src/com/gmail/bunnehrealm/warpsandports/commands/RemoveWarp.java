@@ -29,12 +29,13 @@ public class RemoveWarp implements CommandExecutor {
 						player.sendMessage(ChatColor.RED + "Proper use is "
 								+ ChatColor.AQUA + "/removewarpuser <Player Name> <Warp Name>");
 					} else {
+						MainClass.loadPlayers();
 						Player target = player.getServer().getPlayer(args[0]);
-							if (!(MainClass.players.contains(target.getName() + ".Warps." + args[1]))) {
+							if (!(MainClass.players.contains(target.getUniqueId() + ".Warps." + args[1]))) {
 								player.sendMessage(ChatColor.RED
 										+ "That player does not have that warp!");
 							} else {
-								MainClass.players.set(player.getName() + ".Warps." + args[1], null);
+								MainClass.players.set(player.getUniqueId() + ".Warps." + args[1], null);
 								MainClass.savePlayers();
 								player.sendMessage(ChatColor.GREEN
 										+ "The warp " + ChatColor.AQUA

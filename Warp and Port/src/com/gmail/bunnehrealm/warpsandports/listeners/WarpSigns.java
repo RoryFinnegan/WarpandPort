@@ -51,36 +51,25 @@ public class WarpSigns implements Listener {
 	@EventHandler
 	public void onClick(PlayerInteractEvent e) {
 		Player player = e.getPlayer();
-		player.sendMessage("1");
 		Location loc = e.getClickedBlock().getLocation();
-		player.sendMessage("2");
 		if (e.getClickedBlock().getType() == Material.SIGN
 				|| e.getClickedBlock().getType() == Material.SIGN_POST || e.getClickedBlock().getType() == Material.WALL_SIGN) {
-			player.sendMessage("3");
 			Sign sign = (Sign) e.getClickedBlock().getState();
-			player.sendMessage("4");
 			World world = player.getWorld();
-			player.sendMessage("5");
 			int x = loc.getBlockX();
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
-			player.sendMessage("6");
 			if (MainClass.ports.contains("Signs." + world.getName() + "/" + x
 					+ "/" + y + "/" + z)) {
-				player.sendMessage("7");
 				String line = new String();
 				line = sign.getLine(2);
-				player.sendMessage("8");
 				MainClass.players.set(
-						player.getName() + ".Warps." + ChatColor.stripColor(line), "");
-				player.sendMessage("9");
+						player.getUniqueId() + ".Warps." + ChatColor.stripColor(line), "");
 				MainClass.savePlayers();
 				player.sendMessage(ChatColor.GREEN + "The warp "
 						+ ChatColor.AQUA + sign.getLine(2) + ChatColor.GREEN
 						+ " has been added to your warp list!");
-				player.sendMessage("10");
 				e.setCancelled(true);
-				player.sendMessage("11");
 			}
 		}
 	}

@@ -44,7 +44,7 @@ public class AddWarp implements CommandExecutor {
 										+ "That warp does not exist!");
 								return false;
 							} else {
-								MainClass.players.set(target.getName()
+								MainClass.players.set(target.getUniqueId()
 										+ ".Warps." + args[1].toString() , "");
 								player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.GREEN + " can now warp to " + ChatColor.AQUA + args[1]);
 								MainClass.savePlayers();
