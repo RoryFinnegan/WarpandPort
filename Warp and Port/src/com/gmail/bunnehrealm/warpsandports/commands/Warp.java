@@ -38,13 +38,25 @@ public class Warp implements CommandExecutor{
 						}
 						else{
 							if((player.isOp() || player.hasPermission("warpsandports.warp." + args[0])) && (MainClass.warps.contains("Warps." + args[0]))){
-								World world = Bukkit.getWorld(MainClass.warps.getString("Warps." + args[0] + ".world"));
-								Double x = MainClass.warps.getDouble("Warps." + args[0] + ".x");
-								Double y = MainClass.warps.getDouble("Warps." + args[0] + ".y");
-								Double z = MainClass.warps.getDouble("Warps." + args[0] + ".z");
+								final World world = Bukkit.getWorld(MainClass.warps.getString("Warps." + args[0] + ".world"));
+								final Double x = MainClass.warps.getDouble("Warps." + args[0] + ".x");
+								final Double y = MainClass.warps.getDouble("Warps." + args[0] + ".y");
+								final Double z = MainClass.warps.getDouble("Warps." + args[0] + ".z");
 							
 							Location loc = new Location(world,x,y,z);
-							player.teleport(loc);
+							BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+							player.sendMessage(ChatColor.GREEN + "Teleporting, please wait " + ChatColor.AQUA + MainClass.getConfig().getLong("WarpDelaySeconds") + ChatColor.GREEN + " seconds!");
+							scheduler.scheduleSyncDelayedTask(MainClass, new Runnable(){
+
+								@Override
+								public void run() {
+									
+									Location loc = new Location(world,x,y,z);
+									player.teleport(loc);
+									player.sendMessage(ChatColor.GREEN + "You have been teleported to " + ChatColor.AQUA + args[0]);
+								}
+								
+							}, 20 * MainClass.getConfig().getLong("WarpDelaySeconds"));
 							return true;
 							}
 							else if(!(MainClass.players.contains(player.getUniqueId() + ".Warps." + args[0]))){
@@ -61,7 +73,7 @@ public class Warp implements CommandExecutor{
 									final Double z = MainClass.warps.getDouble("Warps." + args[0] + ".z");
 								
 								BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-								player.sendMessage(ChatColor.GREEN + "Teleporting, please wait " + ChatColor.AQUA + MainClass.getConfig().getInt("WarpDelaySeconds") + ChatColor.GREEN + " seconds!");
+								player.sendMessage(ChatColor.GREEN + "Teleporting, please wait " + ChatColor.AQUA + MainClass.getConfig().getLong("WarpDelaySeconds") + ChatColor.GREEN + " seconds!");
 								scheduler.scheduleSyncDelayedTask(MainClass, new Runnable(){
 
 									@Override

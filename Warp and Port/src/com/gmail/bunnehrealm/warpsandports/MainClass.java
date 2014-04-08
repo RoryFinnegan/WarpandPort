@@ -81,16 +81,16 @@ public class MainClass extends JavaPlugin {
 		
 		getConfig().options().copyDefaults(true);
 		
-		
+		if (!this.getConfig().isSet("WarpDelaySeconds")) {
+			this.getConfig().set("WarpDelay",5);
+		}
 		if (!this.getConfig().isSet("WarpName")) {
 			this.getConfig().set("WarpName", "Warp");
 		}
 		if (!this.getConfig().isSet("WarpColor")) {
 			this.getConfig().set("WarpColor", "&b");
 		}
-		if (!this.getConfig().isSet("WarpDelaySeconds")) {
-			this.getConfig().set("WarpDelay", "5");
-		}
+		
 		saveConfig();
 		try{
 			firstPlayerRun();
