@@ -1,4 +1,6 @@
-package com.gmail.bunnehrealm.warpsandports.commands;
+package net.bunnehrealm.warpsandports.commands;
+
+import net.bunnehrealm.warpsandports.MainClass;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,8 +11,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-
-import com.gmail.bunnehrealm.warpsandports.MainClass;
 
 public class Warp implements CommandExecutor{
 	
@@ -45,8 +45,11 @@ public class Warp implements CommandExecutor{
 							
 							Location loc = new Location(world,x,y,z);
 							BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-							player.sendMessage(ChatColor.GREEN + "Teleporting, please wait " + ChatColor.AQUA + MainClass.getConfig().getLong("WarpDelaySeconds") + ChatColor.GREEN + " seconds!");
-							scheduler.scheduleSyncDelayedTask(MainClass, new Runnable(){
+							try{player.sendMessage(ChatColor.GREEN + "Teleporting, please wait " + ChatColor.AQUA + MainClass.getConfig().getLong("WarpDelaySeconds") + ChatColor.GREEN + " seconds!");
+							}
+							catch(Exception c){
+								System.out.println(c);
+							}scheduler.scheduleSyncDelayedTask(MainClass, new Runnable(){
 
 								@Override
 								public void run() {

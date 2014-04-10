@@ -6,12 +6,12 @@ description: >
 commands:
   setwarp:
         description: Set a warp where you are.
-  addwarpuser:
-        description: Add a warp to a players warp list.
   warp:
         description: Teleports you to a warp.
   delwarp:
         description: Removes a warp.
   removewarpuser:
         description: Removes a warp from a player
+  wnp:
+        description: Commands for warps.
   

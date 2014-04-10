@@ -1,4 +1,6 @@
-package com.gmail.bunnehrealm.warpsandports.commands;
+package net.bunnehrealm.warpsandports.commands;
+
+import net.bunnehrealm.warpsandports.MainClass;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -7,8 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.gmail.bunnehrealm.warpsandports.MainClass;
 
 public class SetWarp implements CommandExecutor {
 	public MainClass MainClass;

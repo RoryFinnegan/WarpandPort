@@ -1,20 +1,21 @@
-package com.gmail.bunnehrealm.warpsandports;
+package net.bunnehrealm.warpsandports;
 
 import java.io.File;
 import java.io.IOException;
+
+import net.bunnehrealm.warpsandports.commands.AddWarp;
+import net.bunnehrealm.warpsandports.commands.DelWarp;
+import net.bunnehrealm.warpsandports.commands.RemoveWarp;
+import net.bunnehrealm.warpsandports.commands.SetWarp;
+import net.bunnehrealm.warpsandports.commands.Warp;
+import net.bunnehrealm.warpsandports.commands.WnP;
+import net.bunnehrealm.warpsandports.listeners.WarpSigns;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.gmail.bunnehrealm.warpsandports.commands.AddWarp;
-import com.gmail.bunnehrealm.warpsandports.commands.DelWarp;
-import com.gmail.bunnehrealm.warpsandports.commands.RemoveWarp;
-import com.gmail.bunnehrealm.warpsandports.commands.SetWarp;
-import com.gmail.bunnehrealm.warpsandports.commands.Warp;
-import com.gmail.bunnehrealm.warpsandports.listeners.WarpSigns;
 
 public class MainClass extends JavaPlugin {
 	public MainClass MainClass;
@@ -30,6 +31,7 @@ public class MainClass extends JavaPlugin {
 	public SetWarp setwarp = new SetWarp(this);
 	public AddWarp addwarp = new AddWarp(this);
 	public Warp warp = new Warp(this);
+	public WnP wnp = new WnP(this);
 	public DelWarp delWarp = new DelWarp(this);
 	public RemoveWarp removeWarp = new RemoveWarp(this);
 	public WarpSigns warpSign = new WarpSigns(this);
@@ -63,8 +65,8 @@ public class MainClass extends JavaPlugin {
 						+ " Enabled!");
 		
 		getCommand("setwarp").setExecutor(setwarp);
-		getCommand("addwarpuser").setExecutor(addwarp);
 		getCommand("warp").setExecutor(warp);
+		getCommand("wnp").setExecutor(wnp);
 		getCommand("delwarp").setExecutor(delWarp);
 		getCommand("removewarpuser").setExecutor(removeWarp);
 		
@@ -82,7 +84,7 @@ public class MainClass extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		
 		if (!this.getConfig().isSet("WarpDelaySeconds")) {
-			this.getConfig().set("WarpDelay",5);
+			this.getConfig().set("WarpDelaySeconds",5);
 		}
 		if (!this.getConfig().isSet("WarpName")) {
 			this.getConfig().set("WarpName", "Warp");
