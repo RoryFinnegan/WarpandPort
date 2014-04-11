@@ -3,10 +3,6 @@ package net.bunnehrealm.warpsandports;
 import java.io.File;
 import java.io.IOException;
 
-import net.bunnehrealm.warpsandports.commands.AddWarp;
-import net.bunnehrealm.warpsandports.commands.DelWarp;
-import net.bunnehrealm.warpsandports.commands.RemoveWarp;
-import net.bunnehrealm.warpsandports.commands.SetWarp;
 import net.bunnehrealm.warpsandports.commands.Warp;
 import net.bunnehrealm.warpsandports.commands.WnP;
 import net.bunnehrealm.warpsandports.listeners.WarpSigns;
@@ -28,12 +24,8 @@ public class MainClass extends JavaPlugin {
 	public File playersFile;
 	public FileConfiguration players;
 	
-	public SetWarp setwarp = new SetWarp(this);
-	public AddWarp addwarp = new AddWarp(this);
 	public Warp warp = new Warp(this);
 	public WnP wnp = new WnP(this);
-	public DelWarp delWarp = new DelWarp(this);
-	public RemoveWarp removeWarp = new RemoveWarp(this);
 	public WarpSigns warpSign = new WarpSigns(this);
 	
 	PluginManager pm = getServer().getPluginManager();
@@ -64,11 +56,9 @@ public class MainClass extends JavaPlugin {
 				.info("[W&P] Warp and Port has been " + ChatColor.GREEN
 						+ " Enabled!");
 		
-		getCommand("setwarp").setExecutor(setwarp);
 		getCommand("warp").setExecutor(warp);
 		getCommand("wnp").setExecutor(wnp);
-		getCommand("delwarp").setExecutor(delWarp);
-		getCommand("removewarpuser").setExecutor(removeWarp);
+
 		
 		pm.registerEvents(warpSign, this);
 

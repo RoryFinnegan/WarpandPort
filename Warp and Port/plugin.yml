@@ -1,5 +1,5 @@
 name: WarpsandPorts
-main: com.gmail.bunnehrealm.warpsandports.MainClass
+main: net.bunnehrealm.warpsandports.MainClass
 version: 1.0
 description: >
             Create Warps and Portals!
