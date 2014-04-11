@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import net.bunnehrealm.warpsandports.commands.Warp;
 import net.bunnehrealm.warpsandports.commands.WnP;
+import net.bunnehrealm.warpsandports.listeners.PortSigns;
 import net.bunnehrealm.warpsandports.listeners.WarpSigns;
 
 import org.bukkit.ChatColor;
@@ -27,6 +28,7 @@ public class MainClass extends JavaPlugin {
 	public Warp warp = new Warp(this);
 	public WnP wnp = new WnP(this);
 	public WarpSigns warpSign = new WarpSigns(this);
+	public PortSigns portSign = new PortSigns(this);
 	
 	PluginManager pm = getServer().getPluginManager();
 
@@ -61,6 +63,7 @@ public class MainClass extends JavaPlugin {
 
 		
 		pm.registerEvents(warpSign, this);
+		pm.registerEvents(portSign, this);
 
 		warpsFile = new File(getDataFolder(), "Warps.yml");
 		warps = new YamlConfiguration();
@@ -73,14 +76,21 @@ public class MainClass extends JavaPlugin {
 		
 		getConfig().options().copyDefaults(true);
 		
-		if (!this.getConfig().isSet("WarpDelaySeconds")) {
-			this.getConfig().set("WarpDelaySeconds",5);
-		}
 		if (!this.getConfig().isSet("WarpName")) {
 			this.getConfig().set("WarpName", "Warp");
 		}
+		if (!this.getConfig().isSet("PortName")) {
+			this.getConfig().set("PortName", "Port");
+		}
+		if (!this.getConfig().isSet("WarpDelaySeconds")) {
+			this.getConfig().set("WarpDelaySeconds",5);
+		}
+		
 		if (!this.getConfig().isSet("WarpColor")) {
 			this.getConfig().set("WarpColor", "&b");
+		}
+		if (!this.getConfig().isSet("PortColor")) {
+			this.getConfig().set("PortColor", "&d");
 		}
 		
 		saveConfig();

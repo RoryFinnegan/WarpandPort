@@ -58,27 +58,29 @@ public class WnP implements CommandExecutor {
 						+ ChatColor.BOLD + " WarpsandPorts Help "
 						+ ChatColor.GOLD + "----------");
 				if (cs.hasPermission("warpsandports.warp.add") || cs.isOp()) {
-					cs.sendMessage(ChatColor.AQUA 
-							+ "/wnp warp add <WarpName>");
-					cs.sendMessage(ChatColor.GOLD + "     - Adds a warp to the server.");
+					cs.sendMessage(ChatColor.AQUA + "/wnp warp add <WarpName>");
+					cs.sendMessage(ChatColor.GOLD
+							+ "     - Adds a warp to the server.");
 				}
 				if (cs.hasPermission("warpsandports.warp.delete") || cs.isOp()) {
 					cs.sendMessage(ChatColor.AQUA
 							+ "/wnp warp delete <Warp Name>");
-					cs.sendMessage(ChatColor.GOLD + "     - Deletes a warp from the server.");
+					cs.sendMessage(ChatColor.GOLD
+							+ "     - Deletes a warp from the server.");
 				}
 				if (cs.hasPermission("warpsandports.user.add") || cs.isOp()) {
 					cs.sendMessage(ChatColor.AQUA
 							+ "/wnp user add <Player Name> <Warp Name>");
-					cs.sendMessage(ChatColor.GOLD + "     - Adds a warp to a user's warp list.");
+					cs.sendMessage(ChatColor.GOLD
+							+ "     - Adds a warp to a user's warp list.");
 				}
 				if (cs.hasPermission("warpsandports.user.remove") || cs.isOp()) {
 					cs.sendMessage(ChatColor.AQUA
 							+ "/wnp user remove <Player Name> <Warp Name>");
-					cs.sendMessage(ChatColor.GOLD + "     - Remove a warp from a user's warp list.");
+					cs.sendMessage(ChatColor.GOLD
+							+ "     - Remove a warp from a user's warp list.");
 				}
-				
-				
+
 			}
 		}
 		return false;
