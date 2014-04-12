@@ -19,11 +19,12 @@ import net.bunnehrealm.warpsandports.MainClass;
 
 public class PortSigns implements Listener {
 	MainClass MainClass;
-	public Location dest;
+	public Location dest = null;
 	public int destx;
 	public int desty;
+	public int destyaw;
+	public int destpitch;
 	public int destz;
-	public World destworld;
 
 	public PortSigns(MainClass MainClass) {
 		this.MainClass = MainClass;
@@ -65,38 +66,42 @@ public class PortSigns implements Listener {
 			if (e.getClickedBlock().getType() == Material.SIGN
 					|| e.getClickedBlock().getType() == Material.SIGN_POST
 					|| e.getClickedBlock().getType() == Material.WALL_SIGN) {
-				player.sendMessage("1");
 				Sign sign = (Sign) e.getClickedBlock().getState();
 				World world = player.getWorld();
 				int x = loc.getBlockX();
 				int y = loc.getBlockY();
 				int z = loc.getBlockZ();
+				destx = MainClass.warps.getInt("Warps."
+						+ ChatColor.stripColor(sign.getLine(2)).toString()
+						+ ".x");
+				desty = MainClass.warps.getInt("Warps."
+						+ ChatColor.stripColor(sign.getLine(2)).toString()
+						+ ".y");
+				destz = MainClass.warps.getInt("Warps."
+						+ ChatColor.stripColor(sign.getLine(2)).toString()
+						+ ".z");
+				destyaw = MainClass.warps.getInt("Warps."
+						+ ChatColor.stripColor(sign.getLine(2)).toString()
+						+ ".yaw");
+				destpitch = MainClass.warps.getInt("Warps."
+						+ ChatColor.stripColor(sign.getLine(2)).toString()
+						+ ".pitch");
+				final World finalWorld = Bukkit.getWorld(MainClass.warps
+						.getString("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".world"));
+
 				if (MainClass.ports.contains("Signs.Port." + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
-					player.sendMessage("2");
 					if (MainClass.warps.contains("Warps."
 							+ ChatColor.stripColor(sign.getLine(2)))) {
-						player.sendMessage("3");
-						player.sendMessage("4");
-						World destworld = Bukkit.getWorld(MainClass.warps
-								.getString("Warps." + sign.getLine(2)
-										+ ".world"));
-						 destx = MainClass.warps.getInt("Warps."
-								+ sign.getLine(2) + ".x");
-						 desty = MainClass.warps.getInt("Warps."
-								+ sign.getLine(2) + ".y");
-						 destz = MainClass.warps.getInt("Warps."
-								+ sign.getLine(2) + ".z");
-						
-						dest.setWorld(destworld);
-						dest.setX(destx);
-						dest.setY(desty);
-						dest.setZ(destz);
 
-						player.sendMessage("5");
-						
+						dest = new Location(finalWorld, destx, desty, destz,
+								destyaw, destpitch);
+
 						player.teleport(dest);
-						player.sendMessage("6");
+						e.setCancelled(true);
+
 					}
 				}
 			}

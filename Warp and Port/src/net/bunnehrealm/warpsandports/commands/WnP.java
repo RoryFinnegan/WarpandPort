@@ -201,6 +201,9 @@ public class WnP implements CommandExecutor {
 					int x = loc.getBlockX();
 					int y = loc.getBlockY();
 					int z = loc.getBlockZ();
+					float yaw = loc.getYaw();
+					float pitch = loc.getPitch();
+							
 
 					World world = player.getWorld();
 
@@ -212,6 +215,10 @@ public class WnP implements CommandExecutor {
 							.set("Warps." + args[2].toString() + ".y", y);
 					MainClass.warps
 							.set("Warps." + args[2].toString() + ".z", z);
+					MainClass.warps
+					.set("Warps." + args[2].toString() + ".yaw", yaw);
+			MainClass.warps
+					.set("Warps." + args[2].toString() + ".pitch", pitch);
 
 					MainClass.saveWarps();
 					player.sendMessage(ChatColor.GREEN + "The warp point "
