@@ -3,6 +3,9 @@ package net.bunnehrealm.warpsandports;
 import java.io.File;
 import java.io.IOException;
 
+import net.bunnehrealm.warpsandports.commands.Home;
+import net.bunnehrealm.warpsandports.commands.HomeExecution;
+import net.bunnehrealm.warpsandports.commands.SetHome;
 import net.bunnehrealm.warpsandports.commands.Warp;
 import net.bunnehrealm.warpsandports.commands.WnP;
 import net.bunnehrealm.warpsandports.listeners.PortSigns;
@@ -31,6 +34,9 @@ public class MainClass extends JavaPlugin {
 	public WnP wnp = new WnP(this);
 	public WarpSigns warpSign = new WarpSigns(this);
 	public PortSigns portSign = new PortSigns(this);
+	public Home home = new Home(this);
+	public SetHome setHome = new SetHome(this);
+	public HomeExecution homeExec = new HomeExecution(this);
 	//^^^^^^^Make objects for these classes^^^^^^^^
 	
 	PluginManager pm = getServer().getPluginManager();
@@ -71,6 +77,8 @@ public class MainClass extends JavaPlugin {
 		
 		getCommand("warp").setExecutor(warp);
 		getCommand("wnp").setExecutor(wnp);
+		getCommand("home").setExecutor(homeExec);
+		getCommand("sethome").setExecutor(homeExec);
 		/*Register the commands from each of their class fields
 		  warp is an object of Warp.java
 		  wnp is an object of WnP.java
@@ -118,6 +126,12 @@ public class MainClass extends JavaPlugin {
 		}
 		if (!this.getConfig().isSet("WarpCancelOnDamage")) {
 			this.getConfig().set("WarpCancelOnDamage", true);
+		}
+		if (!this.getConfig().isSet("HomeDelaySeconds")) {
+			this.getConfig().set("HomeDelaySeconds",5);
+		}
+		if (!this.getConfig().isSet("TpDelaySeconds")) {
+			this.getConfig().set("TpDelaySeconds",5);
 		}
 		//^^^^These are all to add these paths to the config.yml if they do not already exist
 		

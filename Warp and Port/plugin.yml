@@ -4,14 +4,13 @@ version: 1.0
 description: >
             Create Warps and Portals!
 commands:
-  setwarp:
-        description: Set a warp where you are.
+
   warp:
         description: Teleports you to a warp.
-  delwarp:
-        description: Removes a warp.
-  removewarpuser:
-        description: Removes a warp from a player
   wnp:
         description: Commands for warps.
+  home:
+        description: Sends you home.
+  sethome:
+        description: Sets your Home.
   
