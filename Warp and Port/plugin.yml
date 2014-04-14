@@ -13,4 +13,10 @@ commands:
         description: Sends you home.
   sethome:
         description: Sets your Home.
+  tp:
+        description: Teleports you to another player, or teleports one player to another.
+  tphere:
+        description: Teleports a player to you.
+  tpall:
+        description: Teleport all players to you.
   

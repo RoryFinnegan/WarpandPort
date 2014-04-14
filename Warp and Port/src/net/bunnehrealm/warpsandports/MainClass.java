@@ -6,6 +6,10 @@ import java.io.IOException;
 import net.bunnehrealm.warpsandports.commands.Home;
 import net.bunnehrealm.warpsandports.commands.HomeExecution;
 import net.bunnehrealm.warpsandports.commands.SetHome;
+import net.bunnehrealm.warpsandports.commands.Teleport;
+import net.bunnehrealm.warpsandports.commands.TeleportAll;
+import net.bunnehrealm.warpsandports.commands.TeleportHere;
+import net.bunnehrealm.warpsandports.commands.TpExecutor;
 import net.bunnehrealm.warpsandports.commands.Warp;
 import net.bunnehrealm.warpsandports.commands.WnP;
 import net.bunnehrealm.warpsandports.listeners.PortSigns;
@@ -29,7 +33,10 @@ public class MainClass extends JavaPlugin {
 	public File playersFile;
 	public FileConfiguration players;
 	
-	
+	public TpExecutor tpExec= new TpExecutor(this);
+	public Teleport teleport = new Teleport(this);
+	public TeleportHere teleportHere = new TeleportHere(this);
+	public TeleportAll teleportAll = new TeleportAll(this);
 	public Warp warp = new Warp(this);
 	public WnP wnp = new WnP(this);
 	public WarpSigns warpSign = new WarpSigns(this);
@@ -79,6 +86,9 @@ public class MainClass extends JavaPlugin {
 		getCommand("wnp").setExecutor(wnp);
 		getCommand("home").setExecutor(homeExec);
 		getCommand("sethome").setExecutor(homeExec);
+		getCommand("tp").setExecutor(tpExec);
+		getCommand("tphere").setExecutor(tpExec);
+		getCommand("tpall").setExecutor(tpExec);
 		/*Register the commands from each of their class fields
 		  warp is an object of Warp.java
 		  wnp is an object of WnP.java
@@ -120,12 +130,6 @@ public class MainClass extends JavaPlugin {
 		}
 		if (!this.getConfig().isSet("WarpDelaySeconds")) {
 			this.getConfig().set("WarpDelaySeconds",5);
-		}
-		if (!this.getConfig().isSet("WarpCancelOnMove")) {
-			this.getConfig().set("WarpCancelOnMove", false);
-		}
-		if (!this.getConfig().isSet("WarpCancelOnDamage")) {
-			this.getConfig().set("WarpCancelOnDamage", true);
 		}
 		if (!this.getConfig().isSet("HomeDelaySeconds")) {
 			this.getConfig().set("HomeDelaySeconds",5);
