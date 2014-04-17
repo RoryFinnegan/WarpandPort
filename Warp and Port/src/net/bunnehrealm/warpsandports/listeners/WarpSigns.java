@@ -28,14 +28,14 @@ public class WarpSigns implements Listener {
 	public void onSignPlace(SignChangeEvent e) {
 		Player player = e.getPlayer();
 		if (e.getLine(1).equalsIgnoreCase(
-				"[" + MainClass.getConfig().getString("WarpName") + "]")
+				"[" + MainClass.getConfig().getString("Warps.WarpName") + "]")
 				&& (player.hasPermission("warpsandports.warp.signs.create") || player
 						.isOp())) {
 			String signline = e.getLine(2);
 
 			e.setLine(1, ChatColor.BLUE + "["
-					+ MainClass.getConfig().getString("WarpName") + "]");
-			e.setLine(2, MainClass.getConfig().getString("WarpColor")
+					+ MainClass.getConfig().getString("Warps.WarpName") + "]");
+			e.setLine(2, MainClass.getConfig().getString("Warps.WarpColor")
 					.replaceAll("(&([a-f0-9]))", "\u00A7$2")
 					+ signline);
 			Location loc = e.getBlock().getLocation();
@@ -44,8 +44,8 @@ public class WarpSigns implements Listener {
 			int x = loc.getBlockX();
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
-			MainClass.ports.set("Signs.Warp." + world.getName() + "/" + x + "/" + y
-					+ "/" + z, signline);
+			MainClass.ports.set("Signs.Warp." + world.getName() + "/" + x + "/"
+					+ y + "/" + z, signline);
 			MainClass.savePorts();
 		}
 	}
@@ -64,8 +64,8 @@ public class WarpSigns implements Listener {
 				int x = loc.getBlockX();
 				int y = loc.getBlockY();
 				int z = loc.getBlockZ();
-				if (MainClass.ports.contains("Signs.Warp" + world.getName() + "/"
-						+ x + "/" + y + "/" + z)) {
+				if (MainClass.ports.contains("Signs.Warp" + world.getName()
+						+ "/" + x + "/" + y + "/" + z)) {
 					String line = new String();
 					line = ChatColor.stripColor(sign.getLine(2));
 					MainClass.players.set(player.getUniqueId() + ".Warps."
@@ -80,10 +80,12 @@ public class WarpSigns implements Listener {
 			}
 		}
 	}
+
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
-		if (player.hasPermission("warpsandports.warp.signs.destroy") || player.isOp()) {
+		if (player.hasPermission("warpsandports.warp.signs.destroy")
+				|| player.isOp()) {
 			Block block = e.getBlock();
 			if (block.getType() == Material.SIGN
 					|| block.getType() == Material.SIGN_POST
@@ -94,20 +96,21 @@ public class WarpSigns implements Listener {
 				int x = loc.getBlockX();
 				int y = loc.getBlockY();
 				int z = loc.getBlockZ();
-				if (MainClass.ports.contains("Signs.Warp" + world.getName() + "/"
-						+ x + "/" + y + "/" + z)) {
-					MainClass.ports.set("Signs.Warp" + world.getName() + "/" + x
-							+ "/" + y + "/" + z, null);
+				if (MainClass.ports.contains("Signs.Warp" + world.getName()
+						+ "/" + x + "/" + y + "/" + z)) {
+					MainClass.ports.set("Signs.Warp" + world.getName() + "/"
+							+ x + "/" + y + "/" + z, null);
 					MainClass.savePorts();
 
 				}
 			}
-		} else {
-			player.sendMessage(ChatColor.RED
-					+ "You do not have permission to destroy "
-					+ MainClass.getConfig().getString("WarpName") + "s!");
-			e.setCancelled(true);
-		}
+			else {
+				player.sendMessage(ChatColor.RED
+						+ "You do not have permission to destroy "
+						+ MainClass.getConfig().getString("Warps.WarpName") + "s!");
+				e.setCancelled(true);
+			}
+		} 
 	}
 
 }

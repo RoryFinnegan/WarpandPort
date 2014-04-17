@@ -24,7 +24,7 @@ public class Warp implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			final String[] args) {
-		if (string.equalsIgnoreCase("warp") || string.equalsIgnoreCase(MainClass.getConfig().getString("WarpName")) ) {
+		if (string.equalsIgnoreCase("warp") || string.equalsIgnoreCase(MainClass.getConfig().getString("Warps.WarpName")) ) {
 			if (!(cs instanceof Player)) {
 				cs.sendMessage("This command is only for players!");
 				return false;

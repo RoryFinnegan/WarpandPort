@@ -116,26 +116,26 @@ public class MainClass extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		//^^Receive the Config
 		
-		if (!this.getConfig().isSet("WarpName")) {
-			this.getConfig().set("WarpName", "Warp");
+		if (!this.getConfig().isSet("Warps.WarpName")) {
+			this.getConfig().set("Warps.WarpName", "Warp");
 		}
-		if (!this.getConfig().isSet("PortName")) {
-			this.getConfig().set("PortName", "Port");
+		if (!this.getConfig().isSet("Ports.PortName")) {
+			this.getConfig().set("Ports.PortName", "Port");
 		}
-		if (!this.getConfig().isSet("WarpColor")) {
-			this.getConfig().set("WarpColor", "&b");
+		if (!this.getConfig().isSet("Warps.WarpColor")) {
+			this.getConfig().set("Warps.WarpColor", "&b");
 		}
-		if (!this.getConfig().isSet("PortColor")) {
-			this.getConfig().set("PortColor", "&d");
+		if (!this.getConfig().isSet("Ports.PortColor")) {
+			this.getConfig().set("Ports.PortColor", "&d");
 		}
-		if (!this.getConfig().isSet("WarpDelaySeconds")) {
-			this.getConfig().set("WarpDelaySeconds",5);
+		if (!this.getConfig().isSet("Warps.WarpDelaySeconds")) {
+			this.getConfig().set("Warps.WarpDelaySeconds",5);
 		}
-		if (!this.getConfig().isSet("HomeDelaySeconds")) {
-			this.getConfig().set("HomeDelaySeconds",5);
+		if (!this.getConfig().isSet("Homes.HomeDelaySeconds")) {
+			this.getConfig().set("Homes.HomeDelaySeconds",5);
 		}
-		if (!this.getConfig().isSet("TpDelaySeconds")) {
-			this.getConfig().set("TpDelaySeconds",5);
+		if (!this.getConfig().isSet("Teleports.TpDelaySeconds")) {
+			this.getConfig().set("Teleports.TpDelaySeconds",5);
 		}
 		//^^^^These are all to add these paths to the config.yml if they do not already exist
 		

@@ -37,13 +37,16 @@ public class TpExecutor implements CommandExecutor{
 			return false;
 		}
 			if(string.equalsIgnoreCase("tp")){
-				tpObj.teleport(cs, cmd, string, args);
+				Teleport teleportObj = new Teleport(MainClass);
+				teleportObj.teleport(cs, cmd, string, args);
 			}
 			else if(string.equalsIgnoreCase("tphere")){
-				tphereObj.teleport(cs, cmd, string, args);
+				TeleportHere teleporthereObj = new TeleportHere(MainClass);
+				teleporthereObj.teleport(cs, cmd, string, args);
 			}
 			else if(string.equalsIgnoreCase("tpall")){
-				tpallObj.teleport(cs, cmd, string, args);
+				TeleportAll tpAll = new TeleportAll(MainClass);
+				tpAll.teleport(cs, cmd, string, args);
 			}
 		return false;
 	}

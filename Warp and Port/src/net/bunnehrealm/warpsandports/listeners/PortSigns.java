@@ -34,13 +34,13 @@ public class PortSigns implements Listener {
 	public void onSignPlace(SignChangeEvent e) {
 		Player player = e.getPlayer();
 		if (e.getLine(1).equalsIgnoreCase(
-				"[" + MainClass.getConfig().getString("PortName") + "]")
+				"[" + MainClass.getConfig().getString("Ports.PortName") + "]")
 				&& (player.hasPermission("warpsandports.port.signs.create") || player
 						.isOp())) {
 			System.out.println("1");
 			String signline = e.getLine(2);
 			e.setLine(1, ChatColor.BLUE + "["
-					+ MainClass.getConfig().getString("PortName") + "]");
+					+ MainClass.getConfig().getString("Ports.PortName") + "]");
 			e.setLine(2, MainClass.getConfig().getString("PortColor")
 					.replaceAll("(&([a-f0-9]))", "\u00A7$2")
 					+ signline);
@@ -131,11 +131,12 @@ public class PortSigns implements Listener {
 
 				}
 			}
-		} else {
-			player.sendMessage(ChatColor.RED
-					+ "You do not have permission to destroy "
-					+ MainClass.getConfig().getString("PortName") + "s!");
-			e.setCancelled(true);
-		}
+			else {
+				player.sendMessage(ChatColor.RED
+						+ "You do not have permission to destroy "
+						+ MainClass.getConfig().getString("Ports.PortName") + "s!");
+				e.setCancelled(true);
+			}
+		} 
 	}
 }

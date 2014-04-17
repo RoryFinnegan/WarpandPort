@@ -26,11 +26,12 @@ public class TeleportAll {
 	public void teleport(CommandSender cs, Command cmd, String string,
 			String[] args) {
 		final Player player = (Player) cs;
-
-		if (player.hasPermission("warpsandports.teleport.tp")|| player.isOp()) {
+		
+		if (player.hasPermission("warpsandports.teleport.tp") || player.isOp()) {
+			if(args.length == 0){
 			player.sendMessage(ChatColor.GREEN
 					+ "All players will be teleported to you in "
-					+ MainClass.getConfig().getInt("TpDelaySeconds")
+					+ ChatColor.AQUA + MainClass.getConfig().getInt("TpDelaySeconds")
 					+ ChatColor.GREEN + " seconds!");
 
 			BukkitScheduler scheduler = Bukkit.getScheduler();
@@ -46,6 +47,10 @@ public class TeleportAll {
 				}
 
 			}, 20 * MainClass.getConfig().getLong("TpDelaySeconds"));
+			}
+			else{
+				player.sendMessage(ChatColor.RED + "Correct Usage " + ChatColor.AQUA + "/tpall");
+			}
 		} else {
 			player.sendMessage(ChatColor.RED
 					+ "You do not have permission to do that!");

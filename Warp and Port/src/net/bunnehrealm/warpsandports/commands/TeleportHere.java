@@ -28,11 +28,12 @@ public class TeleportHere {
 			String[] args) {
 		final Player player = (Player) cs;
 
-		if (player.hasPermission("warpsandports.teleport.tphere")|| player.isOp()) {
-			if (string.length() == 1) {
+		if (player.hasPermission("warpsandports.teleport.tphere")
+				|| player.isOp()) {
+			if (args.length == 1) {
 				final Player target = player.getServer().getPlayer(args[0]);
 				player.sendMessage(ChatColor.AQUA + target.getDisplayName()
-						+ " will be teleported to you in "
+						+ ChatColor.GREEN + " will be teleported to you in "
 						+ MainClass.getConfig().getInt("TpDelaySeconds")
 						+ ChatColor.GREEN + " seconds!");
 
@@ -50,13 +51,13 @@ public class TeleportHere {
 							}
 
 						}, 20 * MainClass.getConfig().getLong("TpDelaySeconds"));
-			} 
-			
-			else{
-				player.sendMessage(ChatColor.RED + "Correct Usage " + ChatColor.AQUA + "/tphere <Player>");
 			}
-		}
-		else {
+
+			else {
+				player.sendMessage(ChatColor.RED + "Correct Usage "
+						+ ChatColor.AQUA + "/tphere <Player>");
+			}
+		} else {
 			player.sendMessage(ChatColor.RED
 					+ "You do not have permission to do that!");
 		}
