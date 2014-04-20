@@ -35,7 +35,7 @@ public class Home {
 
 				player.sendMessage(ChatColor.GREEN + "Teleporting you in "
 						+ ChatColor.AQUA
-						+ MainClass.getConfig().getLong("HomeDelaySeconds")
+						+ MainClass.getConfig().getLong("Homes.HomeDelaySeconds")
 						+ ChatColor.GREEN + " seconds!");
 				BukkitScheduler scheduler = Bukkit.getScheduler();
 				id = scheduler.scheduleSyncDelayedTask(MainClass,
@@ -64,7 +64,7 @@ public class Home {
 
 							}
 
-						}, 20 * MainClass.getConfig().getLong("HomeDelaySeconds"));
+						}, 20 * MainClass.getConfig().getLong("Homes.HomeDelaySeconds"));
 			} else {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to do that!");
@@ -89,7 +89,7 @@ public class Home {
 				}
 				player.sendMessage(ChatColor.GREEN + "Teleporting you in "
 						+ ChatColor.AQUA
-						+ MainClass.getConfig().getLong("HomeDelaySeconds")
+						+ MainClass.getConfig().getLong("Homes.HomeDelaySeconds")
 						+ ChatColor.GREEN + " seconds!");
 
 				BukkitScheduler scheduler = Bukkit.getScheduler();
@@ -129,7 +129,7 @@ public class Home {
 
 							}
 
-						}, 20 * MainClass.getConfig().getLong("HomeDelaySeconds"));
+						}, 20 * MainClass.getConfig().getLong("Homes.HomeDelaySeconds"));
 			}
 
 		} else {

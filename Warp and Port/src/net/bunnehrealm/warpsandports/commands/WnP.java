@@ -55,7 +55,7 @@ public class WnP implements CommandExecutor {
 				}
 			} else {
 				cs.sendMessage(ChatColor.GOLD + "----------" + ChatColor.AQUA
-						+ ChatColor.BOLD + " WarpsandPorts Help "
+						+ ChatColor.BOLD + " RealmWarpsandPorts Help "
 						+ ChatColor.GOLD + "----------");
 				if (cs.hasPermission("warpsandports.warp.add") || cs.isOp()) {
 					cs.sendMessage(ChatColor.AQUA + "/wnp warp add <WarpName>");

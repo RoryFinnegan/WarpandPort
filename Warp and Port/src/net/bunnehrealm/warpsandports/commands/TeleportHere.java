@@ -34,9 +34,9 @@ public class TeleportHere {
 				final Player target = player.getServer().getPlayer(args[0]);
 				player.sendMessage(ChatColor.AQUA + target.getDisplayName()
 						+ ChatColor.GREEN + " will be teleported to you in "
-						+ MainClass.getConfig().getInt("TpDelaySeconds")
+						+ MainClass.getConfig().getInt("Teleports.TpDelaySeconds")
 						+ ChatColor.GREEN + " seconds!");
-
+				
 				BukkitScheduler scheduler = Bukkit.getScheduler();
 				id = scheduler
 						.scheduleSyncDelayedTask(MainClass, new Runnable() {
@@ -50,7 +50,7 @@ public class TeleportHere {
 										+ " has been teleported to you!");
 							}
 
-						}, 20 * MainClass.getConfig().getLong("TpDelaySeconds"));
+						}, 20 * MainClass.getConfig().getLong("Teleports.TpDelaySeconds"));
 			}
 
 			else {

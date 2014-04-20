@@ -37,11 +37,10 @@ public class PortSigns implements Listener {
 				"[" + MainClass.getConfig().getString("Ports.PortName") + "]")
 				&& (player.hasPermission("warpsandports.port.signs.create") || player
 						.isOp())) {
-			System.out.println("1");
 			String signline = e.getLine(2);
 			e.setLine(1, ChatColor.BLUE + "["
 					+ MainClass.getConfig().getString("Ports.PortName") + "]");
-			e.setLine(2, MainClass.getConfig().getString("PortColor")
+			e.setLine(2, MainClass.getConfig().getString("Ports.PortColor")
 					.replaceAll("(&([a-f0-9]))", "\u00A7$2")
 					+ signline);
 			Location loc = e.getBlock().getLocation();
@@ -52,7 +51,6 @@ public class PortSigns implements Listener {
 			int z = loc.getBlockZ();
 			MainClass.ports.set("Signs.Port." + world.getName() + "/" + x + "/"
 					+ y + "/" + z, signline);
-			System.out.println("2");
 			MainClass.savePorts();
 		}
 	}
@@ -111,18 +109,19 @@ public class PortSigns implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
-		if (player.hasPermission("warpsandports.signs.destroy")
-				|| player.isOp()) {
-			Block block = e.getBlock();
-			if (block.getType() == Material.SIGN
-					|| block.getType() == Material.SIGN_POST
-					|| block.getType() == Material.WALL_SIGN) {
-				Sign sign = (Sign) block;
-				Location loc = sign.getLocation();
-				World world = player.getWorld();
-				int x = loc.getBlockX();
-				int y = loc.getBlockY();
-				int z = loc.getBlockZ();
+
+		Block block = e.getBlock();
+		if (block.getType() == Material.SIGN
+				|| block.getType() == Material.SIGN_POST
+				|| block.getType() == Material.WALL_SIGN) {
+			Sign sign = (Sign) block.getState();
+			Location loc = sign.getLocation();
+			World world = player.getWorld();
+			int x = loc.getBlockX();
+			int y = loc.getBlockY();
+			int z = loc.getBlockZ();
+			if (player.hasPermission("warpsandports.signs.destroy")
+					|| player.isOp()) {
 				if (MainClass.ports.contains("Signs.Port" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					MainClass.ports.set("Signs.Port" + world.getName() + "/"
@@ -130,13 +129,13 @@ public class PortSigns implements Listener {
 					MainClass.savePorts();
 
 				}
-			}
-			else {
+			} else {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
-						+ MainClass.getConfig().getString("Ports.PortName") + "s!");
+						+ MainClass.getConfig().getString("Ports.PortName")
+						+ "s!");
 				e.setCancelled(true);
 			}
-		} 
+		}
 	}
 }

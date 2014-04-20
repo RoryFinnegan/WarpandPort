@@ -60,7 +60,7 @@ public class Warp implements CommandExecutor {
 										+ "Teleporting, please wait "
 										+ ChatColor.AQUA
 										+ MainClass.getConfig().getLong(
-												"WarpDelaySeconds")
+												"Warps.WarpDelaySeconds")
 										+ ChatColor.GREEN + " seconds!");
 							} catch (Exception c) {
 								System.out.println(c);
@@ -82,7 +82,7 @@ public class Warp implements CommandExecutor {
 
 									},
 									20 * MainClass.getConfig().getLong(
-											"WarpDelaySeconds"));
+											"Warps.WarpDelaySeconds"));
 							return true;
 						} else if (!(MainClass.players.contains(player
 								.getUniqueId() + ".Warps." + args[0]))) {
@@ -110,7 +110,7 @@ public class Warp implements CommandExecutor {
 										+ "Teleporting, please wait "
 										+ ChatColor.AQUA
 										+ MainClass.getConfig().getLong(
-												"WarpDelaySeconds")
+												"Warps.WarpDelaySeconds")
 										+ ChatColor.GREEN + " seconds!");
 								scheduler.scheduleSyncDelayedTask(
 										MainClass,
@@ -130,7 +130,7 @@ public class Warp implements CommandExecutor {
 
 										},
 										20 * MainClass.getConfig().getLong(
-												"WarpDelaySeconds"));
+												"Warps.WarpDelaySeconds"));
 							} else {
 								player.sendMessage(ChatColor.RED
 										+ "That Warp does not exist!");

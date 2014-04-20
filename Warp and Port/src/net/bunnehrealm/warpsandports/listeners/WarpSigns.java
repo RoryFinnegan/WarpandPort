@@ -64,8 +64,9 @@ public class WarpSigns implements Listener {
 				int x = loc.getBlockX();
 				int y = loc.getBlockY();
 				int z = loc.getBlockZ();
-				if (MainClass.ports.contains("Signs.Warp" + world.getName()
+				if (MainClass.ports.contains("Signs.Warp." + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
+					System.out.println("2");
 					String line = new String();
 					line = ChatColor.stripColor(sign.getLine(2));
 					MainClass.players.set(player.getUniqueId() + ".Warps."
@@ -84,33 +85,34 @@ public class WarpSigns implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
-		if (player.hasPermission("warpsandports.warp.signs.destroy")
-				|| player.isOp()) {
-			Block block = e.getBlock();
-			if (block.getType() == Material.SIGN
-					|| block.getType() == Material.SIGN_POST
-					|| block.getType() == Material.WALL_SIGN) {
-				Sign sign = (Sign) block;
-				Location loc = sign.getLocation();
-				World world = player.getWorld();
-				int x = loc.getBlockX();
-				int y = loc.getBlockY();
-				int z = loc.getBlockZ();
-				if (MainClass.ports.contains("Signs.Warp" + world.getName()
+
+		Block block = e.getBlock();
+		if (block.getType() == Material.SIGN
+				|| block.getType() == Material.SIGN_POST
+				|| block.getType() == Material.WALL_SIGN) {
+			Sign sign = (Sign) block.getState();
+			Location loc = sign.getLocation();
+			World world = player.getWorld();
+			int x = loc.getBlockX();
+			int y = loc.getBlockY();
+			int z = loc.getBlockZ();
+			if (player.hasPermission("warpsandports.warp.signs.destroy")
+					|| player.isOp()) {
+				if (MainClass.warps.contains("Signs.Warp" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
-					MainClass.ports.set("Signs.Warp" + world.getName() + "/"
+					MainClass.warps.set("Signs.Warp" + world.getName() + "/"
 							+ x + "/" + y + "/" + z, null);
-					MainClass.savePorts();
+					MainClass.saveWarps();
 
 				}
-			}
-			else {
+			} else {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
-						+ MainClass.getConfig().getString("Warps.WarpName") + "s!");
+						+ MainClass.getConfig().getString("Warps.WarpName")
+						+ "s!");
 				e.setCancelled(true);
 			}
-		} 
+		}
 	}
 
 }

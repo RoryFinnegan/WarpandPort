@@ -25,62 +25,102 @@ public class Teleport {
 					|| player.isOp()) {
 
 				final Player target = player.getServer().getPlayer(args[0]);
-				player.sendMessage(ChatColor.GREEN
-						+ "You will be teleported to " + ChatColor.AQUA
-						+ target.getDisplayName() + ChatColor.GREEN + " in "
-						+ ChatColor.AQUA
-						+ MainClass.getConfig().getString("TpDelaySeconds")
-						+ ChatColor.GREEN + " seconds!");
-				BukkitScheduler scheduler = Bukkit.getScheduler();
-				id = scheduler
-						.scheduleSyncDelayedTask(MainClass, new Runnable() {
 
-							@Override
-							public void run() {
-								player.teleport(target);
-								player.sendMessage(ChatColor.GREEN
-										+ "You have been teleported to "
-										+ ChatColor.AQUA
-										+ target.getDisplayName());
-							}
+				if (MainClass.getConfig().getLong("Teleports.TpDelaySeconds") == 0) {
+					player.teleport(target);
+					player.sendMessage(ChatColor.GREEN
+							+ "You have been teleported to " + ChatColor.AQUA
+							+ target.getDisplayName());
+					return;
+				} else if(MainClass.getConfig().getLong("Teleports.TpDelaySeconds") != 0){
+					player.teleport(target);
+					player.sendMessage(ChatColor.GREEN
+							+ "You will be teleported to "
+							+ ChatColor.AQUA
+							+ target.getDisplayName()
+							+ ChatColor.GREEN
+							+ " in "
+							+ ChatColor.AQUA
+							+ MainClass.getConfig().getLong(
+									"Teleports.TpDelaySeconds")
+									+ChatColor.GREEN + " seconds!");
 
-						}, 20 * MainClass.getConfig().getLong("TpDelaySeconds"));
+					BukkitScheduler scheduler = Bukkit.getScheduler();
+					id = scheduler.scheduleSyncDelayedTask(
+							MainClass,
+							new Runnable() {
+
+								@Override
+								public void run() {
+									player.teleport(target);
+									player.sendMessage(ChatColor.GREEN
+											+ "You have been teleported to "
+											+ ChatColor.AQUA
+											+ target.getDisplayName());
+								}
+
+							},
+							20 * MainClass.getConfig().getLong(
+									"Teleports.TpDelaySeconds"));
+				}
 			} else if (string.length() == 2) {
 				if (!(player.hasPermission("warpsandports.teleport.others") || player
 						.isOp())) {
 					player.sendMessage(ChatColor.RED
 							+ "You do not have permission to do that!");
 					return;
+				} else {
+					final Player target1 = player.getServer()
+							.getPlayer(args[0]);
+					final Player target2 = player.getServer()
+							.getPlayer(args[1]);
+
+					if (MainClass.getConfig().getLong(
+							"Teleports.TpDelaySeconds") == 0) {
+						target1.teleport(target2);
+						player.sendMessage(ChatColor.AQUA
+								+ target1.getDisplayName() + ChatColor.GREEN
+								+ " has been teleported to " + ChatColor.AQUA
+								+ target2.getDisplayName());
+					} else {
+						player.sendMessage(ChatColor.AQUA
+								+ target1.getDisplayName()
+								+ ChatColor.GREEN
+								+ " will be teleported to "
+								+ ChatColor.AQUA
+								+ target2.getDisplayName()
+								+ ChatColor.GREEN
+								+ " in "
+								+ ChatColor.AQUA
+								+ MainClass.getConfig().getInt(
+										"Teleports.TpDelaySeconds")
+								+ ChatColor.GREEN + " seconds!");
+
+						BukkitScheduler scheduler = Bukkit.getScheduler();
+						id = scheduler.scheduleSyncDelayedTask(
+								MainClass,
+								new Runnable() {
+
+									@Override
+									public void run() {
+										target1.teleport(target2);
+										player.sendMessage(ChatColor.AQUA
+												+ target1.getDisplayName()
+												+ ChatColor.GREEN
+												+ " has been teleported to "
+												+ ChatColor.AQUA
+												+ target2.getDisplayName());
+									}
+
+								},
+								20 * MainClass.getConfig().getLong(
+										"Teleports.TpDelaySeconds"));
+					}
 				}
-				final Player target1 = player.getServer().getPlayer(args[0]);
-				final Player target2 = player.getServer().getPlayer(args[1]);
-				player.sendMessage(ChatColor.AQUA + target1.getDisplayName()
-						+ ChatColor.GREEN + " will be teleported to "
-						+ ChatColor.AQUA + target2.getDisplayName()
-						+ ChatColor.GREEN + " in " + ChatColor.AQUA
-						+ MainClass.getConfig().getInt("TpDelaySeconds")
-						+ ChatColor.GREEN + " seconds!");
-
-				BukkitScheduler scheduler = Bukkit.getScheduler();
-				id = scheduler
-						.scheduleSyncDelayedTask(MainClass, new Runnable() {
-
-							@Override
-							public void run() {
-								target1.teleport(target2);
-								player.sendMessage(ChatColor.AQUA
-										+ target1.getDisplayName()
-										+ ChatColor.GREEN
-										+ " has been teleported to "
-										+ ChatColor.AQUA
-										+ target2.getDisplayName());
-							}
-
-						}, 20 * MainClass.getConfig().getLong("TpDelaySeconds"));
-
 			} else {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to do that!");
+
 			}
 		} else {
 			player.sendMessage(ChatColor.RED + "Correct Usage "
