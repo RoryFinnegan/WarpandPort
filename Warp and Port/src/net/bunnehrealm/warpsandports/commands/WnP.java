@@ -92,13 +92,22 @@ public class WnP implements CommandExecutor {
 		Player player = (Player) cs;
 		if (player.hasPermission("warpsandports.user.add") || player.isOp()) {
 			if (args.length == 4) {
+				System.out.println(1);
 				Player target = player.getServer().getPlayer(args[2]);
 				if (!(MainClass.warps.contains("Warps." + args[3]))) {
+					System.out.println(2);
 					player.sendMessage(ChatColor.RED
 							+ "That warp does not exist!");
 				} else {
-					MainClass.players.set(target.getUniqueId() + ".Warps."
-							+ args[3].toString(), "");
+					System.out.println(3);
+					try {
+						MainClass.loadPlayers();
+						MainClass.players.set(target.getUniqueId() + ".Warps."
+								+ args[3].toString(), "");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					System.out.println(4);
 					player.sendMessage(ChatColor.AQUA + target.getName()
 							+ ChatColor.GREEN + " can now warp to "
 							+ ChatColor.AQUA + args[3]);
@@ -203,7 +212,6 @@ public class WnP implements CommandExecutor {
 					int z = loc.getBlockZ();
 					float yaw = loc.getYaw();
 					float pitch = loc.getPitch();
-							
 
 					World world = player.getWorld();
 
@@ -215,10 +223,10 @@ public class WnP implements CommandExecutor {
 							.set("Warps." + args[2].toString() + ".y", y);
 					MainClass.warps
 							.set("Warps." + args[2].toString() + ".z", z);
-					MainClass.warps
-					.set("Warps." + args[2].toString() + ".yaw", yaw);
-			MainClass.warps
-					.set("Warps." + args[2].toString() + ".pitch", pitch);
+					MainClass.warps.set("Warps." + args[2].toString() + ".yaw",
+							yaw);
+					MainClass.warps.set("Warps." + args[2].toString()
+							+ ".pitch", pitch);
 
 					MainClass.saveWarps();
 					player.sendMessage(ChatColor.GREEN + "The warp point "

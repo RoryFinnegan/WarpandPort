@@ -121,7 +121,7 @@ public class PortSigns implements Listener {
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
 			if (player.hasPermission("warpsandports.signs.destroy")
-					|| player.isOp()) {
+					|| player.isOp() && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Ports.PortName") + "]"))) {
 				if (MainClass.ports.contains("Signs.Port" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					MainClass.ports.set("Signs.Port" + world.getName() + "/"
@@ -129,7 +129,9 @@ public class PortSigns implements Listener {
 					MainClass.savePorts();
 
 				}
-			} else {
+
+			} else if(!(player.hasPermission("warpsandports.signs.destroy")
+					|| player.isOp()) && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Ports.PortName") + "]"))) {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
 						+ MainClass.getConfig().getString("Ports.PortName")

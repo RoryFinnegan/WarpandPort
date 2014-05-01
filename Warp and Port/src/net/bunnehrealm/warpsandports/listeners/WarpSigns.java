@@ -66,7 +66,6 @@ public class WarpSigns implements Listener {
 				int z = loc.getBlockZ();
 				if (MainClass.ports.contains("Signs.Warp." + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
-					System.out.println("2");
 					String line = new String();
 					line = ChatColor.stripColor(sign.getLine(2));
 					MainClass.players.set(player.getUniqueId() + ".Warps."
@@ -97,7 +96,7 @@ public class WarpSigns implements Listener {
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
 			if (player.hasPermission("warpsandports.warp.signs.destroy")
-					|| player.isOp()) {
+					|| player.isOp() && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Warps.WarpName") + "]"))) {
 				if (MainClass.warps.contains("Signs.Warp" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					MainClass.warps.set("Signs.Warp" + world.getName() + "/"
@@ -105,7 +104,8 @@ public class WarpSigns implements Listener {
 					MainClass.saveWarps();
 
 				}
-			} else {
+			} else if(!(player.hasPermission("warpsandports.warp.signs.destroy")
+					|| player.isOp()) && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("["+MainClass.getConfig().getString("Warps.WarpName") + "]"))) {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
 						+ MainClass.getConfig().getString("Warps.WarpName")
