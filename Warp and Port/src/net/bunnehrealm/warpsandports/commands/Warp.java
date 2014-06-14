@@ -1,5 +1,7 @@
 package net.bunnehrealm.warpsandports.commands;
 
+import java.util.List;
+
 import net.bunnehrealm.warpsandports.MainClass;
 
 import org.bukkit.Bukkit;
@@ -24,12 +26,15 @@ public class Warp implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			final String[] args) {
+		
 		if (string.equalsIgnoreCase("warp") || string.equalsIgnoreCase(MainClass.getConfig().getString("Warps.WarpName")) ) {
 			if (!(cs instanceof Player)) {
 				cs.sendMessage("This command is only for players!");
 				return false;
 			} else {
 				final Player player = (Player) cs;
+				List<String> warps = MainClass.players.getStringList(player
+						.getUniqueId() + ".Warps");
 				if (player.hasPermission("warpsandports.warp") || player.isOp()) {
 					if (args.length != 1) {
 						player.sendMessage(ChatColor.RED

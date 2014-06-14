@@ -1,6 +1,7 @@
 package net.bunnehrealm.warpsandports;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import net.bunnehrealm.warpsandports.commands.Home;
@@ -14,6 +15,7 @@ import net.bunnehrealm.warpsandports.commands.Warp;
 import net.bunnehrealm.warpsandports.commands.WnP;
 import net.bunnehrealm.warpsandports.listeners.PortSigns;
 import net.bunnehrealm.warpsandports.listeners.WarpSigns;
+import net.bunnehrealm.warpsandports.listeners.JoinListener;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,6 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MainClass extends JavaPlugin {
 	//initialize variables
 	public MainClass MainClass;
+	public static MainClass plugin;
 	
 	public File warpsFile;
 	public FileConfiguration warps;
@@ -44,6 +47,7 @@ public class MainClass extends JavaPlugin {
 	public Home home = new Home(this);
 	public SetHome setHome = new SetHome(this);
 	public HomeExecution homeExec = new HomeExecution(this);
+	public JoinListener jl = new JoinListener(this);
 	//^^^^^^^Make objects for these classes^^^^^^^^
 	
 	PluginManager pm = getServer().getPluginManager();
@@ -77,6 +81,7 @@ public class MainClass extends JavaPlugin {
 	//When the plugin is enabled do this
 	@Override
 	public void onEnable() {
+		plugin = this;
 		getLogger()
 				.info("[W&P] Warp and Port has been " + ChatColor.GREEN
 						+ " Enabled!");
@@ -97,6 +102,7 @@ public class MainClass extends JavaPlugin {
 		
 		pm.registerEvents(warpSign, this);
 		pm.registerEvents(portSign, this);
+		pm.registerEvents(jl, this);
 		/*Registers our listeners from WarpSigns.java and PortSigns.java
 		  Again these are objects of those classes
 		  */

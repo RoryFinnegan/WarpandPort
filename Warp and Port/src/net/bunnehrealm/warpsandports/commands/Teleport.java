@@ -33,7 +33,6 @@ public class Teleport {
 							+ target.getDisplayName());
 					return;
 				} else if(MainClass.getConfig().getLong("Teleports.TpDelaySeconds") != 0){
-					player.teleport(target);
 					player.sendMessage(ChatColor.GREEN
 							+ "You will be teleported to "
 							+ ChatColor.AQUA

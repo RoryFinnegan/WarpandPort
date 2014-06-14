@@ -1,5 +1,7 @@
 package net.bunnehrealm.warpsandports.listeners;
 
+import java.util.List;
+
 import net.bunnehrealm.warpsandports.*;
 
 import org.bukkit.ChatColor;
@@ -68,14 +70,22 @@ public class WarpSigns implements Listener {
 						+ "/" + x + "/" + y + "/" + z)) {
 					String line = new String();
 					line = ChatColor.stripColor(sign.getLine(2));
-					MainClass.players.set(player.getUniqueId() + ".Warps."
-							+ ChatColor.stripColor(line), "");
-					MainClass.savePlayers();
-					player.sendMessage(ChatColor.GREEN + "The warp "
-							+ ChatColor.AQUA + sign.getLine(2)
-							+ ChatColor.GREEN
-							+ " has been added to your warp list!");
-					e.setCancelled(true);
+					List<String> warps = MainClass.players.getStringList(player
+							.getUniqueId() + ".Warps");
+					if (warps.contains(line)) {
+						player.sendMessage(ChatColor.BLUE
+								+ "You already have this warp.");
+					} else {
+						warps.add(line);
+						MainClass.players.set(player
+							.getUniqueId() + ".Warps", warps);
+						MainClass.savePlayers();
+						player.sendMessage(ChatColor.GREEN + "The warp "
+								+ ChatColor.AQUA + sign.getLine(2)
+								+ ChatColor.GREEN
+								+ " has been added to your warp list!");
+						e.setCancelled(true);
+					}
 				}
 			}
 		}
@@ -96,7 +106,11 @@ public class WarpSigns implements Listener {
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
 			if (player.hasPermission("warpsandports.warp.signs.destroy")
-					|| player.isOp() && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Warps.WarpName") + "]"))) {
+					|| player.isOp()
+					&& ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(
+							ChatColor.stripColor("["
+									+ MainClass.getConfig().getString(
+											"Warps.WarpName") + "]"))) {
 				if (MainClass.warps.contains("Signs.Warp" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					MainClass.warps.set("Signs.Warp" + world.getName() + "/"
@@ -104,8 +118,13 @@ public class WarpSigns implements Listener {
 					MainClass.saveWarps();
 
 				}
-			} else if(!(player.hasPermission("warpsandports.warp.signs.destroy")
-					|| player.isOp()) && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("["+MainClass.getConfig().getString("Warps.WarpName") + "]"))) {
+			} else if (!(player
+					.hasPermission("warpsandports.warp.signs.destroy") || player
+					.isOp())
+					&& ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(
+							ChatColor.stripColor("["
+									+ MainClass.getConfig().getString(
+											"Warps.WarpName") + "]"))) {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
 						+ MainClass.getConfig().getString("Warps.WarpName")

@@ -1,6 +1,11 @@
 package net.bunnehrealm.warpsandports.commands;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.commands.WarpList;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -16,6 +21,7 @@ public class WnP implements CommandExecutor {
 	public WnP(MainClass MainClass) {
 		this.MainClass = MainClass;
 	}
+	
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
@@ -52,7 +58,15 @@ public class WnP implements CommandExecutor {
 				} catch (Exception e) {
 					System.out.println(e);
 
-				}
+				}}
+				else if (args.length == 1 && args[0].equalsIgnoreCase("list") && (cs.hasPermission("warpsandports.warp.list") || cs.isOp())) {
+					try {
+						WarpList wl = new WarpList(MainClass);
+						wl.getList(cs.getName());
+					} catch (Exception e) {
+						System.out.println(e);
+
+					}
 			} else {
 				cs.sendMessage(ChatColor.GOLD + "----------" + ChatColor.AQUA
 						+ ChatColor.BOLD + " RealmWarpsandPorts Help "
@@ -80,6 +94,11 @@ public class WnP implements CommandExecutor {
 					cs.sendMessage(ChatColor.GOLD
 							+ "     - Remove a warp from a user's warp list.");
 				}
+				if (cs.hasPermission("warpsandports.warp.list") || cs.isOp()) {
+					cs.sendMessage(ChatColor.AQUA + "/wnp list");
+					cs.sendMessage(ChatColor.GOLD
+							+ "     - Shows you a list of your warps.");
+				}
 
 			}
 		}
@@ -92,22 +111,19 @@ public class WnP implements CommandExecutor {
 		Player player = (Player) cs;
 		if (player.hasPermission("warpsandports.user.add") || player.isOp()) {
 			if (args.length == 4) {
-				System.out.println(1);
 				Player target = player.getServer().getPlayer(args[2]);
 				if (!(MainClass.warps.contains("Warps." + args[3]))) {
-					System.out.println(2);
 					player.sendMessage(ChatColor.RED
 							+ "That warp does not exist!");
 				} else {
-					System.out.println(3);
 					try {
 						MainClass.loadPlayers();
-						MainClass.players.set(target.getUniqueId() + ".Warps."
-								+ args[3].toString(), "");
+						List<String> warps = MainClass.players.getStringList(target.getUniqueId() + ".Warps");
+						warps.add(args[3]);
+						MainClass.players.set(target.getUniqueId() + ".Warps", warps);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					System.out.println(4);
 					player.sendMessage(ChatColor.AQUA + target.getName()
 							+ ChatColor.GREEN + " can now warp to "
 							+ ChatColor.AQUA + args[3]);
@@ -136,24 +152,24 @@ public class WnP implements CommandExecutor {
 						+ "/wnp user remove <Player Name> <Warp Name>");
 			} else {
 				MainClass.loadPlayers();
+				
 				Player target = player.getServer().getPlayer(args[2]);
-				if (!(MainClass.players.contains(target.getUniqueId()
-						+ ".Warps." + args[3]))) {
-					player.sendMessage(ChatColor.RED
-							+ "That player does not have that warp!");
-				} else {
-					MainClass.players.set(player.getUniqueId() + ".Warps."
-							+ args[3], null);
-					MainClass.savePlayers();
-					player.sendMessage(ChatColor.GREEN + "The warp "
-							+ ChatColor.AQUA + args[1] + ChatColor.GREEN
-							+ " has been removed from the list of "
-							+ ChatColor.AQUA + args[2]);
-					return true;
+				List<String> warps = MainClass.players.getStringList(target.getUniqueId() + ".Warps");
+				String warp = args[3];
+				for(String s: warps){
+					if(warps.contains(s)){
+						warps.remove(args[3]);
+						MainClass.savePlayers();
+						player.sendMessage(ChatColor.GREEN + "The warp "
+								+ ChatColor.AQUA + args[3] + ChatColor.GREEN
+								+ " has been removed from the list of "
+								+ ChatColor.AQUA + args[2]);
+						return true;
+					}
+					player.sendMessage(ChatColor.RED + "That player does not have that warp!");
 				}
 			}
 		}
-
 		return false;
 	}
 
