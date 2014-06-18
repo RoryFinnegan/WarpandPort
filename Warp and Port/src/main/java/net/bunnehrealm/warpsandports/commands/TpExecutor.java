@@ -29,7 +29,6 @@ public class TpExecutor implements CommandExecutor{
 	TeleportHere tphereObj = new TeleportHere(MainClass);
 	TeleportAll tpallObj = new TeleportAll(MainClass);
 	
-	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			String[] args) {
 		if(!(cs instanceof Player)){

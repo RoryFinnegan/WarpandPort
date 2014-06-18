@@ -23,7 +23,6 @@ public class Warp implements CommandExecutor {
 		this.MainClass = MainClass;
 	}
 
-	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			final String[] args) {
 		
@@ -74,7 +73,6 @@ public class Warp implements CommandExecutor {
 									MainClass,
 									new Runnable() {
 
-										@Override
 										public void run() {
 
 											Location loc = new Location(world,
@@ -121,7 +119,6 @@ public class Warp implements CommandExecutor {
 										MainClass,
 										new Runnable() {
 
-											@Override
 											public void run() {
 
 												Location loc = new Location(

@@ -49,7 +49,6 @@ public class Teleport {
 							MainClass,
 							new Runnable() {
 
-								@Override
 								public void run() {
 									player.teleport(target);
 									player.sendMessage(ChatColor.GREEN
@@ -100,7 +99,6 @@ public class Teleport {
 								MainClass,
 								new Runnable() {
 
-									@Override
 									public void run() {
 										target1.teleport(target2);
 										player.sendMessage(ChatColor.AQUA

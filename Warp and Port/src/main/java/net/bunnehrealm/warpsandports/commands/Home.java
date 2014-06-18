@@ -41,7 +41,6 @@ public class Home {
 				id = scheduler.scheduleSyncDelayedTask(MainClass,
 						new Runnable() {
 
-							@Override
 							public void run() {
 								Location loc = new Location(
 										Bukkit.getWorld(MainClass.players
@@ -96,7 +95,6 @@ public class Home {
 				id = scheduler
 						.scheduleSyncDelayedTask(MainClass, new Runnable() {
 
-							@Override
 							public void run() {
 								Location loc = new Location(Bukkit
 										.getWorld(MainClass.players

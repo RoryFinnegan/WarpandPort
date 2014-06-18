@@ -23,7 +23,6 @@ public class WnP implements CommandExecutor {
 	}
 	
 
-	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			String[] args) {
 		if (string.equalsIgnoreCase("wnp")) {
@@ -62,7 +61,7 @@ public class WnP implements CommandExecutor {
 				else if (args.length == 1 && args[0].equalsIgnoreCase("list") && (cs.hasPermission("warpsandports.warp.list") || cs.isOp())) {
 					try {
 						WarpList wl = new WarpList(MainClass);
-						wl.getList(cs.getName());
+						wl.getList((Player) cs);
 					} catch (Exception e) {
 						System.out.println(e);
 

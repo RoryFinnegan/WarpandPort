@@ -1,6 +1,7 @@
 name: REALMWarpsandPorts
 main: net.bunnehrealm.warpsandports.MainClass
 version: 1.0
+softdepend: [Vault]
 description: >
             Create Warps and Portals!
 commands:
@@ -19,4 +20,6 @@ commands:
         description: Teleports a player to you.
   tpall:
         description: Teleport all players to you.
+  spawn:
+        description: Teleports you to spawn.
   

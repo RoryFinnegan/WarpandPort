@@ -41,7 +41,6 @@ public class TeleportHere {
 				id = scheduler
 						.scheduleSyncDelayedTask(MainClass, new Runnable() {
 
-							@Override
 							public void run() {
 								target.teleport(player);
 								player.sendMessage(ChatColor.AQUA

@@ -37,7 +37,6 @@ public class TeleportAll {
 			BukkitScheduler scheduler = Bukkit.getScheduler();
 			id = scheduler.scheduleSyncDelayedTask(MainClass, new Runnable() {
 
-				@Override
 				public void run() {
 					for (Player targets : Bukkit.getOnlinePlayers()) {
 						targets.teleport(player);

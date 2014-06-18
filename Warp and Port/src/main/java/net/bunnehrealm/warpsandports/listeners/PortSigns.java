@@ -69,30 +69,29 @@ public class PortSigns implements Listener {
 				int x = loc.getBlockX();
 				int y = loc.getBlockY();
 				int z = loc.getBlockZ();
-				destx = MainClass.warps.getInt("Warps."
-						+ ChatColor.stripColor(sign.getLine(2)).toString()
-						+ ".x");
-				desty = MainClass.warps.getInt("Warps."
-						+ ChatColor.stripColor(sign.getLine(2)).toString()
-						+ ".y");
-				destz = MainClass.warps.getInt("Warps."
-						+ ChatColor.stripColor(sign.getLine(2)).toString()
-						+ ".z");
-				destyaw = MainClass.warps.getInt("Warps."
-						+ ChatColor.stripColor(sign.getLine(2)).toString()
-						+ ".yaw");
-				destpitch = MainClass.warps.getInt("Warps."
-						+ ChatColor.stripColor(sign.getLine(2)).toString()
-						+ ".pitch");
-				final World finalWorld = Bukkit.getWorld(MainClass.warps
-						.getString("Warps."
-								+ ChatColor.stripColor(sign.getLine(2))
-										.toString() + ".world"));
-
 				if (MainClass.ports.contains("Signs.Port." + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					if (MainClass.warps.contains("Warps."
 							+ ChatColor.stripColor(sign.getLine(2)))) {
+						destx = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".x");
+						desty = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".y");
+						destz = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".z");
+						destyaw = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".yaw");
+						destpitch = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".pitch");
+						final World finalWorld = Bukkit
+								.getWorld(MainClass.warps.getString("Warps."
+										+ ChatColor.stripColor(sign.getLine(2))
+												.toString() + ".world"));
 
 						dest = new Location(finalWorld, destx, desty, destz,
 								destyaw, destpitch);
@@ -102,6 +101,7 @@ public class PortSigns implements Listener {
 
 					}
 				}
+
 			}
 		}
 	}
@@ -121,7 +121,11 @@ public class PortSigns implements Listener {
 			int y = loc.getBlockY();
 			int z = loc.getBlockZ();
 			if (player.hasPermission("warpsandports.signs.destroy")
-					|| player.isOp() && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Ports.PortName") + "]"))) {
+					|| player.isOp()
+					&& ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(
+							ChatColor.stripColor("["
+									+ MainClass.getConfig().getString(
+											"Ports.PortName") + "]"))) {
 				if (MainClass.ports.contains("Signs.Port" + world.getName()
 						+ "/" + x + "/" + y + "/" + z)) {
 					MainClass.ports.set("Signs.Port" + world.getName() + "/"
@@ -130,8 +134,12 @@ public class PortSigns implements Listener {
 
 				}
 
-			} else if(!(player.hasPermission("warpsandports.signs.destroy")
-					|| player.isOp()) && ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(ChatColor.stripColor("[" + MainClass.getConfig().getString("Ports.PortName") + "]"))) {
+			} else if (!(player.hasPermission("warpsandports.signs.destroy") || player
+					.isOp())
+					&& ChatColor.stripColor(sign.getLine(1)).equalsIgnoreCase(
+							ChatColor.stripColor("["
+									+ MainClass.getConfig().getString(
+											"Ports.PortName") + "]"))) {
 				player.sendMessage(ChatColor.RED
 						+ "You do not have permission to destroy "
 						+ MainClass.getConfig().getString("Ports.PortName")
