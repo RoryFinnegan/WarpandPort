@@ -5,17 +5,17 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class WarpList {
-	MainClass plugin = MainClass.plugin;
+	RealmWarpsandPorts plugin = RealmWarpsandPorts.plugin;
 	
-	public WarpList(MainClass instance){
+	public WarpList(RealmWarpsandPorts instance){
 		this.plugin = instance;
 	}
 	
 	public void getList(Player p){
 		List<String> warps = plugin.players.getStringList(p.getUniqueId() + ".Warps");
-		p.sendMessage(ChatColor.AQUA + "Your " + plugin.getConfig().getString("Warps.WarpName") + "'s are:" + ChatColor.GREEN + warps.toString().replace('[', ' ').replace(']', ' '));
+		p.sendMessage(ChatColor.AQUA + "Your " + plugin.getConfig().getString("Warps.WarpName") + "s are:" + ChatColor.GREEN + warps.toString().replace('[', ' ').replace(']', ' '));
 	}
 }

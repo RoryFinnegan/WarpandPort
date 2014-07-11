@@ -7,13 +7,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class Teleport {
 	int id;
-	public MainClass MainClass;
+	public RealmWarpsandPorts MainClass;
 
-	public Teleport(MainClass MainClass) {
+	public Teleport(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 

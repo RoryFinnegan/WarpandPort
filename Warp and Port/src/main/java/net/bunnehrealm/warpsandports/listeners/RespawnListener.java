@@ -1,6 +1,6 @@
 package net.bunnehrealm.warpsandports.listeners;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,8 +12,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class RespawnListener implements Listener{
-	MainClass plugin = MainClass.plugin;
-	public RespawnListener(MainClass instance){
+	RealmWarpsandPorts plugin = RealmWarpsandPorts.plugin;
+	public RespawnListener(RealmWarpsandPorts instance){
 		this.plugin = instance;
 	}
 	

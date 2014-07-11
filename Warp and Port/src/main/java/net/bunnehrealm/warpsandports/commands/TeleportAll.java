@@ -1,6 +1,6 @@
 package net.bunnehrealm.warpsandports.commands;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,9 +11,9 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public class TeleportAll {
 	int id;
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 
-	public TeleportAll(MainClass MainClass) {
+	public TeleportAll(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 

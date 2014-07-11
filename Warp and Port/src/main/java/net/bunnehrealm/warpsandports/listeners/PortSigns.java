@@ -12,13 +12,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class PortSigns implements Listener {
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	public Location dest = null;
 	public int destx;
 	public int desty;
@@ -26,7 +27,7 @@ public class PortSigns implements Listener {
 	public int destpitch;
 	public int destz;
 
-	public PortSigns(MainClass MainClass) {
+	public PortSigns(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 
@@ -106,6 +107,54 @@ public class PortSigns implements Listener {
 		}
 	}
 
+	@EventHandler
+	public void onPlace(BlockPlaceEvent e) {
+			Player player = e.getPlayer();
+			Location loc = e.getBlockAgainst().getLocation();
+			if (e.getBlockAgainst().getType() == Material.SIGN
+					|| e.getBlockAgainst().getType() == Material.SIGN_POST
+					|| e.getBlockAgainst().getType() == Material.WALL_SIGN) {
+				Sign sign = (Sign) e.getBlockAgainst().getState();
+				World world = player.getWorld();
+				int x = loc.getBlockX();
+				int y = loc.getBlockY();
+				int z = loc.getBlockZ();
+				if (MainClass.ports.contains("Signs.Port." + world.getName()
+						+ "/" + x + "/" + y + "/" + z)) {
+					if (MainClass.warps.contains("Warps."
+							+ ChatColor.stripColor(sign.getLine(2)))) {
+						destx = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".x");
+						desty = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".y");
+						destz = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".z");
+						destyaw = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".yaw");
+						destpitch = MainClass.warps.getInt("Warps."
+								+ ChatColor.stripColor(sign.getLine(2))
+										.toString() + ".pitch");
+						final World finalWorld = Bukkit
+								.getWorld(MainClass.warps.getString("Warps."
+										+ ChatColor.stripColor(sign.getLine(2))
+												.toString() + ".world"));
+
+						dest = new Location(finalWorld, destx, desty, destz,
+								destyaw, destpitch);
+
+						player.teleport(dest);
+						e.setCancelled(true);
+
+					}
+				}
+
+			}
+		}
+	
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();

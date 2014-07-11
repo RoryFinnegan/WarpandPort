@@ -20,9 +20,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class WarpSigns implements Listener {
 
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 
-	public WarpSigns(MainClass MainClass) {
+	public WarpSigns(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 

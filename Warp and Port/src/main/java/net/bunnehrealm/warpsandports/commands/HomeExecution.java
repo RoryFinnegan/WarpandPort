@@ -1,6 +1,6 @@
 package net.bunnehrealm.warpsandports.commands;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,12 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class HomeExecution implements CommandExecutor{
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	Home Home;
 	SetHome SetHome;
 	HomeExecution HomeExecution;
 	
-	public HomeExecution(MainClass MainClass){
+	public HomeExecution(RealmWarpsandPorts MainClass){
 		this.MainClass = MainClass;
 	}
 	public HomeExecution(Home Home){

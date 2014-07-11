@@ -5,13 +5,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class SetHome {
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	HomeExecution HomeExecution;
 
-	public SetHome(MainClass MainClass) {
+	public SetHome(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 

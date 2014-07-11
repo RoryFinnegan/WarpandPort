@@ -4,15 +4,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class TpExecutor implements CommandExecutor{
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	Teleport Teleport;
 	TeleportAll TeleportAll;
 	TeleportHere TeleportHere;
 	
-	public TpExecutor(MainClass MainClass){
+	public TpExecutor(RealmWarpsandPorts MainClass){
 		this.MainClass = MainClass;
 	}
 	public TpExecutor(Teleport Teleport){

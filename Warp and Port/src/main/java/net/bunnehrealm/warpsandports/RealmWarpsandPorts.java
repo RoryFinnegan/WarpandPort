@@ -24,10 +24,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MainClass extends JavaPlugin {
+public class RealmWarpsandPorts extends JavaPlugin {
 	// initialize variables
-	public MainClass MainClass;
-	public static MainClass plugin;
+	public RealmWarpsandPorts MainClass;
+	public static RealmWarpsandPorts plugin;
 
 	public File warpsFile;
 	public FileConfiguration warps;

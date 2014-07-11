@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 import net.bunnehrealm.warpsandports.commands.WarpList;
 
 import org.bukkit.ChatColor;
@@ -16,9 +16,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class WnP implements CommandExecutor {
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 
-	public WnP(MainClass MainClass) {
+	public WnP(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 	

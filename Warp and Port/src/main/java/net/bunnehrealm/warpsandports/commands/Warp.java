@@ -2,7 +2,7 @@ package net.bunnehrealm.warpsandports.commands;
 
 import java.util.List;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,17 +16,19 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public class Warp implements CommandExecutor {
 
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	public int id;
 
-	public Warp(MainClass MainClass) {
+	public Warp(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 
 	public boolean onCommand(CommandSender cs, Command cmd, String string,
 			final String[] args) {
-		
-		if (string.equalsIgnoreCase("warp") || string.equalsIgnoreCase(MainClass.getConfig().getString("Warps.WarpName")) ) {
+
+		if (string.equalsIgnoreCase("warp")
+				|| string.equalsIgnoreCase(MainClass.getConfig().getString(
+						"Warps.WarpName"))) {
 			if (!(cs instanceof Player)) {
 				cs.sendMessage("This command is only for players!");
 				return false;
@@ -40,8 +42,12 @@ public class Warp implements CommandExecutor {
 								+ "The correct usage is " + ChatColor.AQUA
 								+ "/warp <Warp Name>");
 					} else {
-						if ((player.isOp() || player
-								.hasPermission("warpsandports.warp." + args[0]))
+						if ((player.isOp()
+								|| player.hasPermission("warpsandports.warp."
+										+ args[0])
+								|| player.hasPermission("warpsandports.warp.*") || MainClass.players
+								.getStringList(player.getUniqueId() + ".Warps")
+								.contains(args[0]))
 								&& (MainClass.warps
 										.contains("Warps." + args[0]))) {
 							final World world = Bukkit.getWorld(MainClass.warps

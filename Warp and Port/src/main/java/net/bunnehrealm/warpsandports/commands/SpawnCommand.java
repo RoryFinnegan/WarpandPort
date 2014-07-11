@@ -1,6 +1,6 @@
 package net.bunnehrealm.warpsandports.commands;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,9 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class SpawnCommand implements CommandExecutor {
-	MainClass plugin = MainClass.plugin;
+	RealmWarpsandPorts plugin = RealmWarpsandPorts.plugin;
 
-	public SpawnCommand(MainClass instance) {
+	public SpawnCommand(RealmWarpsandPorts instance) {
 		this.plugin = instance;
 	}
 
@@ -49,7 +49,11 @@ public class SpawnCommand implements CommandExecutor {
 
 				}, 20 * plugin.getConfig().getInt("Spawn.delay"));
 			}
+
 			return false;
+		} else {
+			p.sendMessage(ChatColor.RED
+					+ "You do not have permission to use this command!");
 		}
 		return false;
 

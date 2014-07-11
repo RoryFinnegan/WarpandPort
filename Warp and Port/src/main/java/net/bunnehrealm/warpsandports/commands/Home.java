@@ -8,14 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 public class Home {
 
-	MainClass MainClass;
+	RealmWarpsandPorts MainClass;
 	int id;
 
-	public Home(MainClass MainClass) {
+	public Home(RealmWarpsandPorts MainClass) {
 		this.MainClass = MainClass;
 	}
 

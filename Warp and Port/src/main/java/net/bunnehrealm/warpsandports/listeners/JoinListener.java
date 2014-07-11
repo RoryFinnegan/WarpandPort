@@ -7,22 +7,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 
-import net.bunnehrealm.warpsandports.MainClass;
+import net.bunnehrealm.warpsandports.RealmWarpsandPorts;
 
 /**
  * Created by Rory Finnegan on 6/14/14.
  */
 public class JoinListener implements Listener {
-	MainClass plugin = MainClass.plugin;
+	RealmWarpsandPorts plugin = RealmWarpsandPorts.plugin;
 
-	public JoinListener(MainClass instance) {
+	public JoinListener(RealmWarpsandPorts instance) {
 		this.plugin = instance;
 	}
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
+		final Player p = e.getPlayer();
 		if (!(plugin.players.contains(p.getUniqueId() + ".hasjoined"))) {
 			World world = Bukkit.getWorld(plugin.warps.getString("Warps.firstspawn.world"));
 			double x = (plugin.warps.getInt("Warps.firstspawn.x"));
@@ -31,8 +32,16 @@ public class JoinListener implements Listener {
 			float yaw = (plugin.warps.getLong("Warps.firstspawn.yaw"));
 			float pitch = (plugin.warps.getLong("Warps.firstspawn.pitch"));
 			
-			Location loc = new Location(world, x, y, z, yaw, pitch);
-			p.teleport(loc);
+			final Location loc = new Location(world, x, y, z, yaw, pitch);
+			BukkitScheduler schedule = Bukkit.getScheduler();
+			schedule.scheduleSyncDelayedTask(plugin, new Runnable(){
+
+				public void run() {
+					p.teleport(loc);
+					
+				}
+				
+			}, 3);
 			plugin.players.set(p.getUniqueId() + ".hasjoined", true);
 
 		}
